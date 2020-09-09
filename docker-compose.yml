@@ -1,0 +1,27 @@
+# docker-compose.yml
+version: "3"
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - 8080:8080
+    environment:
+      - POSTGRES_HOST=database
+    env_file:
+      - .env
+  db:
+    image: postgres
+    environment: 
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_USER: postgres
+      POSTGRES_DB: soft
+    volumes:
+      - pgdata:/var/lib/postgresql/pgdata
+    ports:
+      - 5433:5433
+    env_file:
+      - .env 
+volumes:
+  pgdata:
