@@ -2,8 +2,7 @@ FROM maven:3.6.3-jdk-11 as backend
 WORKDIR /backend
 COPY . /backend/
 RUN mkdir -p src/main/resources/static
-COPY --from=frontend /frontend/build src/main/resources/static
-RUN mvn clean verify
+RUN mvn clean install
 
 FROM openjdk:14-jdk-alpine
 COPY --from=backend /backend/target/BackEndSoftPlan-1.0-SNAPSHOT.jar ./app.jar
