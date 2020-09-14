@@ -1,4 +1,4 @@
-# docker-compose.yml
+#docker-compose.yml
 version: "3"
 services:
   backend:
@@ -13,10 +13,13 @@ services:
     env_file:
       - .env
   frontend:
-    build: ./frontend
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    tty: true
     volumes:
-      - '.:/frontend'
-      - '/frontend/node_modules'
+      - './frontend'
+      - '/frontend/node_modules'    
     expose:
       - 3000
     ports:
